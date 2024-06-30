@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>People List</title>
+</head>
+<body>
+<h2>People List</h2>
+<p>Number of people:<span th:text="${people.size()}"> </span></p>
+<a th:href="@{/people/new}">Add new person</a>
+<br>
+<table border="1" cellpadding="3">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Birth Year</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${people}">
+        <td th:text="${person.id}"></td>
+        <td><a th:href="@{/people/{id}(id=${person.id})}"><span th:text="${person.fullName}"></span></a></td>
+        <td th:text="${person.birthYear}"></td>
+        <td>
+            <a th:href="@{/people/{id}/edit(id=${person.id})}">Edit</a>
+            <form th:action="@{/people/{id}(id=${person.id})}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<hr>
+<a th:href="@{/}">Go back</a>
+</body>
+</html>

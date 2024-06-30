@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Books List</title>
+</head>
+<body>
+<h2>Books List</h2>
+<p>Number of books: <span th:text="${books.size()}"></span></p>
+<a th:href="@{/books/new}">Add new book</a>
+<br>
+<table border="1" cellpadding="3">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Book Details</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.getBookId()}"></td>
+        <td><a th:href="@{/books/{id}(id=${book.getBookId()})}">Book Details.</a></td>
+        <td th:text="${book.getTitle()}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.publicationYear}"></td>
+        <td>
+            <a th:href="@{/books/{id}/edit(id=${book.getBookId()})}">Edit</a>
+            <form th:action="@{/books/{id}(id=${book.getBookId()})}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<hr>
+<a th:href="@{/}">Go back</a>
+</body>
+</html>

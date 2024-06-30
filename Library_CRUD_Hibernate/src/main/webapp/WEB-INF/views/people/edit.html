@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Person</title>
+</head>
+<body>
+<h1>Edit Person</h1>
+<form th:action="@{/people/{id}(id=${person.id})}" th:object="${person}" method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" th:field="*{fullName}"><br>
+    <label for="birthYear">Birth Year:</label>
+    <input type="number" id="birthYear" th:field="*{birthYear}"><br>
+    <button type="submit">Save</button>
+</form>
+<a th:href="@{/people}">Back to People</a>
+</body>
+</html>
